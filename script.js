@@ -56,39 +56,24 @@ window.addEventListener('resize', () => {
 // 3. Animacje Paralaksy dla sekcji .hero
 // -----------------------------------------------------
 
-// Animacja obrazu (Monika Matuszewska)
-gsap.to(".hero__left img", {
-  y: "50%", // Obraz zjeżdża szybciej w dół niż reszta
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "bottom top",
-    scrub: true,
-    
-  },
+const heroTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+    }
 });
 
-// Animacja nazwy (MONIKA MATUSZEWSKA)
-gsap.to(".hero__name", {
-  y: "120%", // Nazwa znika pod ekranem
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "bottom top",
-    scrub: true,
-  },
-});
+heroTl.to(".hero_left img", { y: "20%" }, 0);
+heroTl.to(".hero_name", { y: "100%" }, 0);
+heroTl.to(".hero_desc", { y: "120%" }, 0);
 
-// Animacja opisu
-gsap.to(".hero__desc", {
-  y: "60%", 
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "bottom top",
-    scrub: true,
-  },
-});
+
+
+
+
+
 
 
 // -----------------------------------------------------
@@ -139,36 +124,38 @@ ScrollTrigger.matchMedia({
 
 
 
-const trainingsTl = gsap.timeline({
+// -----------------------------------------------------
+// 5. Animacje dla sekcji "Services"
+// -----------------------------------------------------
+gsap.from(".services_header > *", {
   scrollTrigger: {
-    trigger: ".trainings",
-    start: "top bottom", // Zaczynamy, gdy sekcja wjeżdża od dołu
-    end: "bottom top",   // Kończymy, gdy sekcja znika u góry
-    scrub: true, // Animacja nie jest powiązana bezpośrednio z przewijaniem
-    normalizeScroll : true , 
-  }
+    trigger: ".services",
+    start: "top 80%",
+  },
+  opacity: 0,
+  y: 30,
+  duration: 1,
+  ease: "power3.out"
 });
 
-trainingsTl
-  // Tekst zaczyna od przesunięcia w dół i wraca do 0
-  .fromTo(".trainings__text", {
-    y: "15%", // Początek (niżej)
-  }, {
-    y: "0%", // Koniec (w naturalnej pozycji)
-  })
-  // Galeria zaczyna od przesunięcia w dół i wraca do 0
-  .fromTo(".trainings__gallery", {
-    y: "10%", // Początek (niżej, mniej niż tekst)
-  }, {
-    y: "0%", // Koniec
-  }, "<"); // Znak "<" sprawia, że ta animacja zaczyna się równocześnie z poprzednią
-
-
 // -----------------------------------------------------
-// 6. Animacje dla sekcji "Reviews" (opinie)
+// 6. Animacja przejścia między sekcjami (Services -> Reviews)
 // -----------------------------------------------------
+gsap.to(".reviews", {
+  marginTop: "-30vh", // Używamy ujemnego marginesu, aby "pociągnąć" sekcję w górę i zlikwidować lukę
+  scrollTrigger: {
+    trigger: ".services", // Animacja zaczyna się, gdy sekcja .services jest na ekranie
+    start: "center center", // Start, gdy środek .services jest w środku ekranu
+    end: "bottom top",      // Koniec, gdy dół .services dotknie góry ekranu
+    scrub: true,            // Płynne przewijanie
+  },
+});
 
-gsap.from(".reviews__header > *", {
+
+
+
+
+gsap.from(".reviews_header > *", {
   scrollTrigger: {
     trigger: ".reviews",
     start: "top 80%",
@@ -182,7 +169,7 @@ gsap.from(".reviews__header > *", {
 
 gsap.from(".review-card", {
   scrollTrigger: {
-    trigger: ".reviews__container",
+    trigger: ".reviews_container",
     start: "top 80%",
   },
   opacity: 0,
@@ -207,4 +194,19 @@ $(document).ready(function() {
           $('.navbar').removeClass('solid');
       }
     });
+});
+
+// -----------------------------------------------------
+// 8. Animacja dla sekcji Footer
+// -----------------------------------------------------
+gsap.from(".footer_container > *", {
+  scrollTrigger: {
+    trigger: ".footer",
+    start: "top 95%",
+  },
+  opacity: 0,
+  y: 40,
+  duration: 1,
+  stagger: 0.2,
+  ease: "power3.out"
 });
