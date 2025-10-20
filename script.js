@@ -1,13 +1,10 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// -----------------------------------------------------
-// 1. Integracja Lenis (Smooth Scrolling) z GSAP (ScrollTrigger)
-// KLUCZOWE POPRAWKI DLA USUNIĘCIA DRGAŃ
-// -----------------------------------------------------
+
 
 const lenis = new Lenis();
 
-// Powiadom ScrollTrigger o każdym scrollu z Lenis, aby mógł on precyzyjnie animować
+
 lenis.on('scroll', ScrollTrigger.update);
 
 // Zintegruj Lenis z pętlą animacji GSAP dla maksymalnej płynności
@@ -18,10 +15,6 @@ gsap.ticker.add((time)=>{
 // Opcjonalnie: wyłącz wygładzanie lagów dla tikera GSAP, co często poprawia płynność w połączeniu z Lenis
 gsap.ticker.lagSmoothing(0);
 
-
-// -----------------------------------------------------
-// 2. Obsługa Menu Hamburgera i Nawigacji
-// -----------------------------------------------------
 const hamburger = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
 const overlay = document.querySelector('.menu-overlay');
@@ -51,11 +44,6 @@ window.addEventListener('resize', () => {
     if(window.innerWidth > 1000) closeMenu();
 });
 
-
-// -----------------------------------------------------
-// 3. Animacje Paralaksy dla sekcji .hero
-// -----------------------------------------------------
-
 const heroTl = gsap.timeline({
     scrollTrigger: {
         trigger: ".hero",
@@ -74,11 +62,6 @@ heroTl.to(".hero_desc", { y: "120%" }, 0);
 
 
 
-
-
-// -----------------------------------------------------
-// 4. Przypięcie i Animacja sekcji "About"
-// -----------------------------------------------------
 
 ScrollTrigger.matchMedia({
   // desktop
@@ -124,9 +107,7 @@ ScrollTrigger.matchMedia({
 
 
 
-// -----------------------------------------------------
-// 5. Animacje dla sekcji "Services"
-// -----------------------------------------------------
+
 gsap.from(".services_header > *", {
   scrollTrigger: {
     trigger: ".services",
@@ -138,9 +119,6 @@ gsap.from(".services_header > *", {
   ease: "power3.out"
 });
 
-// -----------------------------------------------------
-// 6. Animacja przejścia między sekcjami (Services -> Reviews)
-// -----------------------------------------------------
 gsap.to(".reviews", {
   marginTop: "-30vh", // Używamy ujemnego marginesu, aby "pociągnąć" sekcję w górę i zlikwidować lukę
   scrollTrigger: {
@@ -180,9 +158,6 @@ gsap.from(".review-card", {
 });
 
 
-// -----------------------------------------------------
-// 7. jQuery - Zmiana wyglądu paska nawigacji (Navbar)
-// -----------------------------------------------------
 
 $(document).ready(function() {
     // Transition effect for navbar 
@@ -196,9 +171,6 @@ $(document).ready(function() {
     });
 });
 
-// -----------------------------------------------------
-// 8. Animacja dla sekcji Footer
-// -----------------------------------------------------
 gsap.from(".footer_container > *", {
   scrollTrigger: {
     trigger: ".footer",
