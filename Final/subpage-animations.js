@@ -1,8 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
-
-    // 1. Animacja dla nagłówka podstrony
     gsap.from(".subpage-hero_content > *", {
         opacity: 0,
         y: 30,
@@ -12,21 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         delay: 0.5
     });
 
-    // 2. Animacja dla tytułów sekcji
-    gsap.utils.toArray('.section-title').forEach(title => {
-        gsap.from(title, {
-            scrollTrigger: {
-                trigger: title,
-                start: "top 90%",
-            },
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-            ease: "power2.out"
-        });
-    });
-
-    // 3. Animacja dla oferty szkoleń (szkolenia.html)
     gsap.utils.toArray('.offer-item').forEach(item => {
         gsap.from(item, {
             scrollTrigger: {
@@ -40,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 4. Animacja dla cennika (stylizacje.html)
     gsap.from(".pricelist-category", {
         scrollTrigger: {
             trigger: ".pricelist-section",
@@ -53,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "power3.out"
     });
 
-    // 5. Animacja dla galerii
     gsap.from(".gallery-item", {
         scrollTrigger: {
             trigger: ".gallery-grid",
@@ -66,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "power2.out"
     });
 
-    // 6. Animacja dla sekcji kontaktowej na dole
     gsap.from(".contact-offer-section > *", {
         scrollTrigger: {
             trigger: ".contact-offer-section",
